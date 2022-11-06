@@ -76,5 +76,3 @@ or
 ```
 yarn start
 ```
-
-This project on development mode does not work properly on firetox, pls use chrome or brave

@@ -13,8 +13,7 @@ export default function Footer({ activeSocial = true }) {
         &copy; PLAY ART {new Date().getFullYear()}
       </span>
       <div className={styles.tAndC}>
-        <span>Terms</span>
-        <span>Built by Crispy</span>
+        <span>Built by PRAISE</span>
       </div>
       <div className={styles.socials}>
         <a target={"_blank"} rel="noreferrer" href="https://github.com/xcrispy">

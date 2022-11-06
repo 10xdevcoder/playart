@@ -11,7 +11,11 @@ import Navbar from "../components/Navbar/Navbar";
 import { testdataLines, testDataUrl } from "../dependencies/testData";
 import { RoundButtonInputArt } from "../components/RoundButton/RoundButtonTools";
 import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
-import { convertMsToTime, shortenText } from "../components/Addons/Extras";
+import {
+  blobToFile,
+  convertMsToTime,
+  shortenText,
+} from "../components/Addons/Extras";
 import { useAccount } from "wagmi";
 import MintModal from "../components/Modals/MintModal";
 import InputArtField, {
@@ -134,13 +138,16 @@ export const ViewArt = () => {
       if (!isConnected) return;
       const artFile = dataURIToBlob(testDataUrl);
       console.log("got here ok");
+      /*
       console.log(artName);
       console.log(artDescription);
       console.log(address);
       console.log(savedData);
       console.log(artUrlData);
+      */
+      console.log(blobToFile(artFile, artName));
       const artStructure = {
-        image: artFile,
+        image: blobToFile(artFile, artName.replace(/\s/g, "")),
         name: artName,
         description: artDescription,
         properties: {
