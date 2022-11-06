@@ -17,11 +17,15 @@ import { LinkTwo } from "@icon-park/react";
 import { UilMultiply } from "@iconscout/react-unicons";
 import InputArtField from "../Addons/InputArtField";
 import { UilExternalLinkAlt } from "@iconscout/react-unicons";
+import { useParams } from "react-router-dom";
 
 const PreviewAndShareModal = (props) => {
   const previewCanvas = useRef("");
   const [creator, setCreator] = useState("");
   const [copied, setCopied] = useState(false);
+
+  const [artData, setArtData] = useState("");
+  const { object_id } = useParams();
   const loadMoralis = async () => {
     await Moralis.start({
       appId: process.env.REACT_APP_APPLICATION_ID,
@@ -30,24 +34,24 @@ const PreviewAndShareModal = (props) => {
   };
   useEffect(() => {
     loadMoralis();
-    LoadData();
   }, []);
   useEffect(() => {
     setTimeout(() => setCopied(false), 4200);
   }, [copied]);
-
+  useEffect(() => {
+    LoadData();
+  });
   const LoadData = async () => {
     const ArtTestData = Moralis.Object.extend("ArtTestData");
     const artTestDataquery = new Moralis.Query(ArtTestData);
-
-    artTestDataquery
-      .get(props.object_id?.toString())
-      .then(async (Dataquery) => {
-        previewCanvas.current.loadSaveData(Dataquery?.attributes.SavedData);
-        setCreator(Dataquery?.attributes.ArtCreator);
-      });
+    artTestDataquery.get(object_id?.toString()).then(async (Dataquery) => {
+      setCreator(Dataquery?.attributes.ArtCreator);
+      setArtData(Dataquery?.attributes.SavedData);
+      //  previewCanvas.current.loadSaveData(Dataquery?.attributes.SavedData);
+    });
+    console.log(creator);
   };
-  // props?.stuffs(LoadData);
+  //props?.stuffs(LoadData);
   return (
     <div>
       <>
@@ -100,7 +104,7 @@ const PreviewAndShareModal = (props) => {
                       hideInterface
                       canvasWidth={500}
                       canvasHeight={510}
-                      //  saveData={props.previewcanvasdata}
+                      saveData={artData}
                       ref={(canvasDraw) => (previewCanvas.current = canvasDraw)}
                     />
                   </div>
@@ -202,7 +206,7 @@ const PreviewAndShareModal = (props) => {
                     }}
                   >
                     <InputArtField
-                      value={`${window.location.host}/art/${props.object_id}`}
+                      defaultValue={`${window.location.host}/art/${props.object_id}`}
                       icon={
                         <UilExternalLinkAlt
                           style={{ cursor: "pointer" }}

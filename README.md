@@ -1,70 +1,80 @@
-# Getting Started with Create React App
+# Play Art
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project details
 
-## Available Scripts
+Play Art is a decentralized ART and NFT creation platform, for creating artistic NFT that have a weirdly unique prop called live drawing.
 
-In the project directory, you can run:
+[More on project code logic](https://www.w3resource.com/html5-canvas/html5-canvas-lines.php)
 
-### `npm start`
+### Project info
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+project created by praise with mentoring from 0xProf (ozipraisegod@gmail.com, you can also create an issue to contact me (i montor all my repos))
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- This project uses NFT.storage to store the metadata following the ERC1155 format.
 
-### `npm test`
+```js
+const artStructure = {
+  image: {The artwork in blob form},
+  name: {The artwork name as string},
+  description: {The artwork description as string},
+  properties: {
+    type: "art",
+    authors: [
+      {
+        address: {The artwork minter address},
+      },
+    ],
+    details: {
+      live_draw_art: {The live drawable coordinates for the artwork in JSON string},
+      raw_art_base64:  {The raw base64 for the image},
+    },
+  },
+};
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+https://github.com/praise-eze/playart/blob/7a7c4b50a2eac529f9bd54873cef90c87bab141d/src/pages/ViewArt.js#L61
+https://github.com/praise-eze/playart/blob/7a7c4b50a2eac529f9bd54873cef90c87bab141d/src/pages/ViewArt.js#L160
 
-### `npm run build`
+- This project is deployed on the polygon mumbai blockchain and takes advantage of the fast transaction time & low gas cost it has.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Running the app
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+First, clone the repo with the following git command:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+git clone https://github.com/praise-eze/playart.git
+```
 
-### `npm run eject`
+Second, open a terminal in the root directory of the project and run:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
+npm install
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+to install all the package dependencies for the project
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Create a .env file in the root folder and populate it with the following variables:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```
+REACT_APP_SERVER_URL =
+REACT_APP_APPLICATION_ID =
+REACT_APP_INFURA_ID =
+REACT_APP_ALCHEMY_KEY =
+REACT_APP_NFT_STORAGE_TOKEN =
+REACT_APP_MORALIS_KEY =
+```
 
-## Learn More
+for testing, if you cannot get the env, pls leave an issue on the repo and i can setup some test envs
+Finally, run the development server:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+npm start
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+or
 
-### Code Splitting
+```
+yarn start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project on development mode does not work properly on firetox, pls use chrome or brave

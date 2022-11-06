@@ -151,9 +151,7 @@ export const CreateArt = () => {
     allowPublicMint,
     debouncedArtName,
   ]);
-  const loadModal = (func) => {
-    func();
-  };
+
   const SaveData = (
     showNavbar,
     showColorPalette,
@@ -328,7 +326,6 @@ export const CreateArt = () => {
                   cursor="pointer"
                   onClick={() => {
                     setShowPreviewAndHideModal(true);
-                    loadModal();
                   }}
                 >
                   Preview and Share
@@ -610,12 +607,10 @@ export const CreateArt = () => {
           </div>
         </div>
         <PreviewAndShareModal
-          previewcanvasdata={
-            artData ? savedData : saveableCanvas.current?.getSaveData()
-          }
-          stuffs={loadModal}
+          previewcanvasdata={savedData}
           show={showPreviewAndHideModal}
           object_id={object_id}
+          data={savedData}
           onHide={() => setShowPreviewAndHideModal(false)}
         />
       </div>
