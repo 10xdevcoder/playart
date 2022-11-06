@@ -1,0 +1,14 @@
+.modal-40w {
+  width: 35vw !important;
+  max-width: 35vw !important;
+}
+.modal-content {
+  /*background-color: red; */
+  border: 5px solid black !important;
+  border-radius: 20px !important;
+}
+
+.modal-70w {
+  width: 69vw !important;
+  max-width: 69vw !important;
+}

@@ -1,0 +1,6 @@
+.exploreCard {
+    transition: box-shadow .3s;
+}
+.exploreCard:hover {
+    box-shadow: 0 0 8px rgba(33,33,33,.2); 
+}

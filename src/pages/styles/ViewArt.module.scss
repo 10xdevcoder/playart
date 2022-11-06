@@ -1,0 +1,40 @@
+.ViewArtStyles {
+  margin: 1em 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.CreatorAndMint {
+  width: 70%;
+  margin: 3.5em auto;
+  display: flex;
+  justify-content: space-between;
+}
+.Fix {
+  margin-top: 1.4em;
+  margin-bottom: 5em;
+  display: flex;
+  gap: 0.7em;
+  padding: 0.6em 1.7em 0.6em 0.6em;
+}
+.Jazzicon {
+  border-radius: 50%;
+}
+.artistTag {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  line-height: 1em;
+}
+
+.textOwner {
+  font-size: 14px;
+}
+.textOwnerAddress {
+  padding-top: 5px;
+  font-size: 19.9px;
+  font-weight: 750;
+}
