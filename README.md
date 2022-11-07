@@ -8,9 +8,9 @@ Play Art is a decentralized ART and NFT creation platform, for creating artistic
 
 ### Project info
 
-project created by praise with mentoring from 0xProf (ozipraisegod@gmail.com, you can also create an issue to contact me (i montor all my repos))
+project created by praise (ozipraisegod@gmail.com, you can also create an issue to contact me (i monitor all my repos))
 
-- This project uses NFT.storage to store the metadata following the ERC1155 format.
+- This project uses Web3.storge to store the metadata in the following format.
 
 ```js
 const artStructure = {
@@ -62,6 +62,7 @@ REACT_APP_INFURA_ID =
 REACT_APP_ALCHEMY_KEY =
 REACT_APP_NFT_STORAGE_TOKEN =
 REACT_APP_MORALIS_KEY =
+REACT_APP_MASTER_KEY =
 ```
 
 for testing, if you cannot get the env, pls leave an issue on the repo and i can setup some test envs
@@ -76,3 +77,5 @@ or
 ```
 yarn start
 ```
+
+preferably use chrome or brave for testing

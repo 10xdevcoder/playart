@@ -18,6 +18,7 @@ const InitializeArtPage = () => {
       await Moralis.start({
         appId: process.env.REACT_APP_APPLICATION_ID,
         serverUrl: process.env.REACT_APP_SERVER_URL,
+        masterKey: process.env.REACT_APP_MASTER_KEY,
       });
     };
     loadMoralis();

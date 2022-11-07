@@ -65,6 +65,7 @@ export const CreateArt = () => {
       await Moralis.start({
         appId: process.env.REACT_APP_APPLICATION_ID,
         serverUrl: process.env.REACT_APP_SERVER_URL,
+        masterKey: process.env.REACT_APP_MASTER_KEY,
       });
     };
     loadMoralis();
@@ -239,7 +240,7 @@ export const CreateArt = () => {
             <div style={{ display: "flex", alignItems: "center", gap: "1em" }}>
               <RoundButtonTools
                 onClick={() => {
-                  navigate(-1);
+                  navigate("/");
                 }}
               >
                 <Back theme="outline" size="30" fill="#000000" />

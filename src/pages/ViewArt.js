@@ -12,6 +12,8 @@ import { testdataLines, testDataUrl } from "../dependencies/testData";
 import { RoundButtonInputArt } from "../components/RoundButton/RoundButtonTools";
 import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
 import {
+  ArtNFTABI,
+  ArtNFTAddress,
   blobToFile,
   convertMsToTime,
   shortenText,
@@ -23,14 +25,17 @@ import InputArtField, {
 } from "../components/Addons/InputArtField";
 import { UilPen } from "@iconscout/react-unicons";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { useNetwork, useSwitchNetwork } from "wagmi";
+import { useNetwork, useSigner } from "wagmi";
 import {
   base64toFile,
   dataURIToBlob,
+  dataURLtoFile,
 } from "../components/Addons/Base64toImageConverter";
 import { NFTStorage } from "nft.storage";
 import LoadingBar from "react-top-loading-bar";
 import { Dna } from "react-loader-spinner";
+import { ethers } from "ethers";
+import { Web3Storage } from "web3.storage";
 
 export const ViewArt = () => {
   const { art_id } = useParams();
@@ -48,7 +53,7 @@ export const ViewArt = () => {
   const [loadimmediately, setLoadImmediately] = useState(true);
   const [isMintingArt, setIsMintingArt] = useState(false);
   const [artUrlData, setArtUrlData] = useState("");
-
+  const { data: signer } = useSigner();
   const [error, setError] = useState(false);
 
   const [updates, setUpdates] = useState(
@@ -57,19 +62,25 @@ export const ViewArt = () => {
 
   const [progress, setProgress] = useState(0);
   const [showMintModal, setShowMintModal] = useState(false);
+  const [showArtPic, setShowArtPic] = useState(false);
   const { chain } = useNetwork();
 
   const loadableCanvas = useRef("");
 
   /************** NFT STORAGE CLIENT ******************* */
   const NFT_STORAGE_TOKEN = process.env.REACT_APP_NFT_STORAGE_TOKEN;
-  const client = new NFTStorage({ token: NFT_STORAGE_TOKEN });
+  const NFTStorageClient = new NFTStorage({ token: NFT_STORAGE_TOKEN });
+
+  const Web3StorageClient = new Web3Storage({
+    token: process.env.REACT_APP_WEB3_STORAGE_KEY,
+  });
 
   useEffect(() => {
     const loadMoralis = async () => {
       await Moralis.start({
         appId: process.env.REACT_APP_APPLICATION_ID,
         serverUrl: process.env.REACT_APP_SERVER_URL,
+        masterKey: process.env.REACT_APP_MASTER_KEY,
       });
     };
     loadMoralis();
@@ -133,11 +144,37 @@ export const ViewArt = () => {
     setProgress(100);
   });
 
+  async function storeWithProgress() {
+    const files = dataURLtoFile(artUrlData, "lol.png");
+    // show the root cid as soon as it's ready
+    /* const onRootCidReady = cid => {
+      console.log('uploading files with cid:', cid)
+    }
+  
+    // when each chunk is stored, update the percentage complete and display
+    const totalSize = files.map(f => f.size).reduce((a, b) => a + b, 0)
+    let uploaded = 0
+  
+    const onStoredChunk = size => {
+      uploaded += size
+      const pct = 100 * (uploaded / totalSize)
+      console.log(`Uploading... ${pct.toFixed(2)}% complete`)
+    }
+   */
+    // makeStorageClient returns an authorized web3.storage client instance
+
+    // client.put will invoke our callbacks during the upload
+    // and return the root cid when the upload completes
+    return Web3StorageClient.put(
+      [files] /* { onRootCidReady, onStoredChunk }*/
+    );
+  }
+
   const saveToIpfs = async () => {
     if (!error) {
       if (!isConnected) return;
-      const artFile = dataURIToBlob(testDataUrl);
       console.log("got here ok");
+      // storeWithProgress();
       /*
       console.log(artName);
       console.log(artDescription);
@@ -145,9 +182,8 @@ export const ViewArt = () => {
       console.log(savedData);
       console.log(artUrlData);
       */
-      console.log(blobToFile(artFile, artName));
       const artStructure = {
-        image: blobToFile(artFile, artName.replace(/\s/g, "")),
+        image: artUrlData,
         name: artName,
         description: artDescription,
         properties: {
@@ -164,6 +200,10 @@ export const ViewArt = () => {
         },
       };
 
+      const someData = new Blob(["Home sweet home"]);
+      const cid = await NFTStorageClient.storeBlob(someData);
+      console.log(cid);
+
       const metadata = await client.store(artStructure);
       console.log(
         "Metadata URI: ",
@@ -174,9 +214,32 @@ export const ViewArt = () => {
         "ipfs://",
         "https://nftstorage.link/ipfs/"
       );
+
       console.log(ipfsdata);
     }
   };
+
+  const Mint = async (tokenUri) => {
+    const ArtNFTContract = new ethers.Contract(
+      ArtNFTAddress,
+      ArtNFTABI,
+      signer
+    );
+    try {
+      const createtoken = await ArtNFTContract.createToken(tokenUri);
+      await createtoken.wait();
+      setIsMintingArt(false);
+      return;
+    } catch (e) {
+      return;
+    }
+  };
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+      setShowArtPic(!showArtPic);
+    }
+  });
 
   return (
     <>
@@ -285,7 +348,7 @@ export const ViewArt = () => {
                             artDateUpdated.toString()?.replace(/-/g, "/")
                           )
                       )
-                    ) + " mins ago"
+                    ) + " ago"
                   : null}
               </h1>
               <div
@@ -339,6 +402,11 @@ export const ViewArt = () => {
               </RoundButtonInputArt>
             </div>
           </div>
+          {showArtPic && (
+            <div style={{ marginBottom: "7em" }}>
+              <img alt="_test" src={artUrlData} />
+            </div>
+          )}
           <MintModal
             // size="md"
             widthclassname="modal-40w"
