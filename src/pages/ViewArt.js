@@ -204,7 +204,7 @@ export const ViewArt = () => {
       const cid = await NFTStorageClient.storeBlob(someData);
       console.log(cid);
 
-      const metadata = await client.store(artStructure);
+      const metadata = await NFTStorageClient.store(artStructure);
       console.log(
         "Metadata URI: ",
         metadata.url.replace("ipfs://", "https://nftstorage.link/ipfs/")
