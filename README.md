@@ -55,7 +55,8 @@ Second, open a terminal in the root directory of the project and run:
 npm install
 ```
 
-to install all the package dependencies for the project
+to install all the package dependencies for the project  
+if that fails run `npm install --force`
 
 Create a .env file in the root folder and populate it with the following variables:
 
