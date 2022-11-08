@@ -1,5 +1,9 @@
-export const loadExternalURL = (url) => {
-  window.open(url, "_blank");
+export const loadExternalURL = (url, newpage = true) => {
+  if (newpage == true) {
+    window.open(url, "_blank");
+  } else if (newpage == false) {
+    window.open(url, "_self");
+  }
 };
 
 export const copyToClipboard = async (value) => {

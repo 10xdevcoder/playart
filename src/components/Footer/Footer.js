@@ -9,10 +9,16 @@ export default function Footer({ activeSocial = true }) {
         " "
       )}
     >
-      <span className={styles.Copyright}>
+      <span
+        style={{ fontSize: "20px", color: "black", fontWeight: "500" }}
+        className={styles.Copyright}
+      >
         &copy; PLAY ART {new Date().getFullYear()}
       </span>
-      <div className={styles.tAndC}>
+      <div
+        style={{ fontSize: "17px", color: "black", fontWeight: "300" }}
+        className={styles.tAndC}
+      >
         <span>Built by PRAISE</span>
       </div>
       <div className={styles.socials}>

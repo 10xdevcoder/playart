@@ -41,6 +41,7 @@ export const RoundButtonInputArt = ({
       }}
       className={[styles.button].join(" ")}
     >
+      {" "}
       {children}
     </button>
   );

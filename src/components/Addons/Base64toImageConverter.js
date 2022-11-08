@@ -3,7 +3,7 @@ export const base64toFile = (base64File) => {
   const buffer = Buffer.from(base64File.slice(i + 7), "base64");
   const name = `${Math.random().toString(36).slice(-5)}.png`;
   const file = new File({ buffer, name, type: "image/png" });
-  console.log("file", file);
+  // console.log("file", file);
   return file;
 };
 

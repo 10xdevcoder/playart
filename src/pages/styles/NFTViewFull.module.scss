@@ -1,0 +1,74 @@
+.img {
+  border-radius: 20px;
+  min-height: 500px;
+  min-width: 500px;
+}
+.Placeholder {
+  display: flex;
+  gap: 7em;
+}
+.propsDetails {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+}
+.description {
+  font-size: 18px;
+  max-width: 400px;
+}
+.name_tokenid {
+  font-size: 30px;
+  font-weight: 900;
+  max-width: 400px;
+}
+.name {
+  font-size: 21px;
+  font-weight: 900;
+  max-width: 400px;
+}
+
+.ownerheading {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 15px;
+  gap: 0em;
+
+  &Details {
+    display: flex;
+    flex-direction: column;
+  }
+}
+.Blockie {
+  border-radius: 50%;
+}
+.textOwner {
+  font-size: 18px;
+}
+.text {
+  font-size: 26px;
+  font-weight: 600;
+}
+.traits {
+  width: 500px;
+  background-color: #c0c8e340;
+  border-radius: 20px;
+  padding: 20px;
+  font-size: 25px;
+
+  &extra {
+    font-size: 20px;
+    cursor: pointer;
+  }
+}
+.Fix {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+.AddIcons {
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+}

@@ -76,7 +76,7 @@ export const CreateArt = () => {
     setArtUrlData(saveableCanvas?.current?.getDataURL());
     setProgress(20);
     const ArtTestData = Moralis.Object.extend("ArtTestData");
-    console.log("checking ...");
+    // console.log("checking ...");
     const artTestDataquery = new Moralis.Query(ArtTestData);
 
     artTestDataquery.get(object_id?.toString()).then(
@@ -95,8 +95,8 @@ export const CreateArt = () => {
         setCreator(Dataquery?.attributes.ArtCreator);
         setArtUrlData(Dataquery?.attributes.ArtUrlData);
         saveableCanvas.current.loadSaveData(Dataquery?.attributes.SavedData);
-        console.log(Dataquery?.attributes.AllowPublicEdit);
-        console.log(allowPublicEdit);
+        // console.log(Dataquery?.attributes.AllowPublicEdit);
+        // console.log(allowPublicEdit);
         /*
         console.log(Dataquery?.attributes.ShowNavbar);
         console.log(Dataquery?.attributes.ShowColorPalette);
@@ -106,7 +106,7 @@ export const CreateArt = () => {
         console.log(Dataquery?.attributes.LazyRadius);
         console.log(Dataquery?.attributes.SavedData);
         */
-        console.log(Dataquery);
+        //  console.log(Dataquery);
         debounceSaveData(
           Dataquery?.attributes.ShowNavbar,
           Dataquery?.attributes.ShowColorPalette,
@@ -120,8 +120,8 @@ export const CreateArt = () => {
         );
         ////// END UPDATE ALL STATES /////////////
         setArtData(Dataquery);
-        console.log(artData);
-        console.log(object_id);
+        //  console.log(artData);
+        // console.log(object_id);
       },
       (error) => {}
     );
@@ -164,10 +164,12 @@ export const CreateArt = () => {
     artName,
     creator
   ) => {
+    /*
     console.log(allowPublicEdit);
     console.log(isConnected && creator === address);
     console.log(creator);
     console.log(creator, address, isConnected);
+    */
     if (allowPublicEdit || (isConnected && creator === address)) {
       setProgress(50);
       const ArtTestData = Moralis.Object.extend("ArtTestData");
@@ -187,14 +189,14 @@ export const CreateArt = () => {
           Dataquery.set("ArtName", artName);
           Dataquery.set("ArtUrlData", saveableCanvas.current?.getDataURL());
           setArtUrlData(Dataquery?.attributes.ArtUrlData);
-          console.log("saved to the mongo");
+          // console.log("saved to the mongo");
           Dataquery.set("ArtCreator", isConnected ? address : "");
           setProgress(70);
           setSavedData(Dataquery?.SavedData);
           setArtData(Dataquery);
           await Dataquery.save();
           setProgress(100);
-          console.log(Dataquery);
+          // console.log(Dataquery);
         },
         (error) => {
           // sendNotification("Invalid post ID", "Post ID was not found", "danger");
@@ -216,6 +218,7 @@ export const CreateArt = () => {
     <>
       <LoadingBar
         color="#F76D6E"
+        height="5px"
         progress={progress}
         onLoaderFinished={() => setProgress(0)}
       />

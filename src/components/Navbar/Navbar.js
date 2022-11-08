@@ -20,6 +20,7 @@ function Navbar() {
         </h3>
         <div className={styles.Links}>
           {/*} <Link to={"/explore"}>Explore</Link> */}
+          <Link to={"/"}>Home</Link>
           <Link to={"/draw"}>Create</Link>
           {isConnected ? (
             <Link to={`/account/${address}`}>Account</Link>

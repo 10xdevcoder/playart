@@ -113,7 +113,7 @@ export default class CanvasDraw extends PureComponent {
     this.points = [];
     this.lines = [];
     this.erasedLines = [];
-
+    this.isLiveDrawing = false;
     this.mouseHasMoved = true;
     this.valuesChanged = true;
     this.isDrawing = false;

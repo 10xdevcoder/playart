@@ -50,7 +50,7 @@ const PreviewAndShareModal = (props) => {
       setArtData(Dataquery?.attributes.SavedData);
       //  previewCanvas.current.loadSaveData(Dataquery?.attributes.SavedData);
     });
-    console.log(creator);
+    // console.log(creator);
   };
   //props?.stuffs(LoadData);
   return (

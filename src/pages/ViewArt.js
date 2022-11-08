@@ -56,9 +56,7 @@ export const ViewArt = () => {
   const { data: signer } = useSigner();
   const [error, setError] = useState(false);
 
-  const [updates, setUpdates] = useState(
-    "Saving to ipfs \br mint tokeon the polygon network"
-  );
+  const [updates, setUpdates] = useState("");
 
   const [progress, setProgress] = useState(0);
   const [showMintModal, setShowMintModal] = useState(false);
@@ -90,7 +88,7 @@ export const ViewArt = () => {
 
   const QueryData = async () => {
     const ArtTestData = Moralis.Object.extend("ArtTestData");
-    console.log("checking ...");
+    // console.log("checking ...");
     const artTestDataquery = new Moralis.Query(ArtTestData);
     setProgress(20);
     artTestDataquery.get(art_id?.toString()).then(
@@ -107,8 +105,8 @@ export const ViewArt = () => {
 
         setArtData(Dataquery);
 
-        console.log(artdata);
-        console.log(art_id);
+        // console.log(artdata);
+        // console.log(art_id);
         setProgress(100);
         setTimeout(function () {
           setLoadImmediately(false);
@@ -144,44 +142,11 @@ export const ViewArt = () => {
     setProgress(100);
   });
 
-  async function storeWithProgress() {
-    const files = dataURLtoFile(artUrlData, "lol.png");
-    // show the root cid as soon as it's ready
-    /* const onRootCidReady = cid => {
-      console.log('uploading files with cid:', cid)
-    }
-  
-    // when each chunk is stored, update the percentage complete and display
-    const totalSize = files.map(f => f.size).reduce((a, b) => a + b, 0)
-    let uploaded = 0
-  
-    const onStoredChunk = size => {
-      uploaded += size
-      const pct = 100 * (uploaded / totalSize)
-      console.log(`Uploading... ${pct.toFixed(2)}% complete`)
-    }
-   */
-    // makeStorageClient returns an authorized web3.storage client instance
-
-    // client.put will invoke our callbacks during the upload
-    // and return the root cid when the upload completes
-    return Web3StorageClient.put(
-      [files] /* { onRootCidReady, onStoredChunk }*/
-    );
-  }
-
   const saveToIpfs = async () => {
     if (!error) {
       if (!isConnected) return;
       console.log("got here ok");
-      // storeWithProgress();
-      /*
-      console.log(artName);
-      console.log(artDescription);
-      console.log(address);
-      console.log(savedData);
-      console.log(artUrlData);
-      */
+      setUpdates("Uploading to ipfs");
       const artStructure = {
         image: artUrlData,
         name: artName,
@@ -200,22 +165,12 @@ export const ViewArt = () => {
         },
       };
 
-      const someData = new Blob(["Home sweet home"]);
-      const cid = await NFTStorageClient.storeBlob(someData);
-      console.log(cid);
-
-      const metadata = await NFTStorageClient.store(artStructure);
-      console.log(
-        "Metadata URI: ",
-        metadata.url.replace("ipfs://", "https://nftstorage.link/ipfs/")
-      );
-
-      const ipfsdata = metadata.url.replace(
-        "ipfs://",
-        "https://nftstorage.link/ipfs/"
-      );
-
-      console.log(ipfsdata);
+      const artSaveData = new Blob([JSON.stringify(artStructure)]);
+      const cid = await NFTStorageClient.storeBlob(artSaveData);
+      setUpdates("Uploaded to ipfs");
+      const ipfsdata = `https://nftstorage.link/ipfs/${cid}`;
+      // console.log(ipfsdata);
+      Mint(ipfsdata);
     }
   };
 
@@ -227,10 +182,14 @@ export const ViewArt = () => {
     );
     try {
       const createtoken = await ArtNFTContract.createToken(tokenUri);
+      setUpdates("Creating mint transaction");
       await createtoken.wait();
       setIsMintingArt(false);
+      setUpdates("Minting successfull");
       return;
     } catch (e) {
+      setUpdates("Error : " + e.message.slice(0, 26));
+      setIsMintingArt(false);
       return;
     }
   };
@@ -245,6 +204,7 @@ export const ViewArt = () => {
     <>
       <LoadingBar
         color="#F76D6E"
+        height="5px"
         progress={progress}
         onLoaderFinished={() => setProgress(0)}
       />
@@ -269,10 +229,10 @@ export const ViewArt = () => {
             ref={(canvasDraw) => (loadableCanvas.current = canvasDraw)}
             saveData={savedData}
             onLoadStart={() => {
-              console.log("load started");
+              //  console.log("load started");
             }}
             onLoadEnd={() => {
-              console.log("loaded ended");
+              //  console.log("loaded ended");
             }}
             liveDrawTimeEject={(e) => {
               setTimeFrameValue(Number((e / 400).toFixed(0)));
@@ -311,7 +271,7 @@ export const ViewArt = () => {
           <span style={{ paddingRight: "1em" }}>{timeFrameValue}</span>
         </PlayerSlider>
       </div>
-      {!error ? (
+      {!error && (
         <div>
           <div className={styles.CreatorAndMint}>
             <div
@@ -389,6 +349,7 @@ export const ViewArt = () => {
                 onClick={() => {
                   setShowMintModal(true);
                   setIsMintingArt(false);
+                  setUpdates("");
                 }}
               >
                 <span
@@ -510,7 +471,51 @@ export const ViewArt = () => {
                         {updates}
                       </span>
                     </>
-                  ) : null}
+                  ) : (
+                    <div>
+                      <div>
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            padding: "1em",
+                          }}
+                        >
+                          <h3 style={{ fontWeight: "700" }}>
+                            You do not have permission to mint this art{" "}
+                          </h3>
+                          <span style={{ fontWeight: "600", fontSize: "20px" }}>
+                            request permission from art creator
+                          </span>
+                        </div>
+                        <div>
+                          <RoundButtonInputArt
+                            padding="0.9em 1.1em"
+                            width="100%"
+                            height="50px"
+                            borderRadius="38px"
+                            cursor="pointer"
+                            onClick={() => {
+                              setShowMintModal(false);
+                            }}
+                          >
+                            <span
+                              style={{
+                                fontSize: "25px",
+                                fontWeight: "400",
+                                display: "flex",
+                                alignItems: "center",
+                              }}
+                            >
+                              OK
+                            </span>
+                          </RoundButtonInputArt>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               ) : (
                 <div
@@ -668,7 +673,7 @@ export const ViewArt = () => {
             </div>
           </MintModal>
         </div>
-      ) : null}
+      )}
     </>
   );
 };
