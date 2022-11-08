@@ -8,13 +8,13 @@ Play Art is a decentralized ART and NFT creation platform, for creating artistic
 
 ### Project info
 
-project created by praise (ozipraisegod@gmail.com, you can also create an issue to contact me (i monitor all my repos))
+project created by praise (to contact me : ozipraisegod@gmail.com, you can also create an issue to contact me (i monitor all my repos))
 
-- This project uses Web3.storge to store the metadata in the following format.
+- This project uses NFT.storge to store the metadata with storeBlob in the following format.
 
 ```js
 const artStructure = {
-  image: {The artwork in blob form},
+  image: {The artwork base64 in string},
   name: {The artwork name as string},
   description: {The artwork description as string},
   properties: {
@@ -32,10 +32,14 @@ const artStructure = {
 };
 ```
 
-https://github.com/praise-eze/playart/blob/7a7c4b50a2eac529f9bd54873cef90c87bab141d/src/pages/ViewArt.js#L61
-https://github.com/praise-eze/playart/blob/7a7c4b50a2eac529f9bd54873cef90c87bab141d/src/pages/ViewArt.js#L160
+https://github.com/praise-eze/playart/blob/7a7c4b50a2eac529f9bd54873cef90c87bab141d/src/pages/ViewArt.js#L70
+https://github.com/praise-eze/playart/blob/7a7c4b50a2eac529f9bd54873cef90c87bab141d/src/pages/ViewArt.js#L169
 
 - This project is deployed on the polygon mumbai blockchain and takes advantage of the fast transaction time & low gas cost it has.
+
+https://mumbai.polygonscan.com/address/0x195E173068DC793a43E18c5Eb2844b3823D81055
+
+### submission video
 
 ## Running the app
 
