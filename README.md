@@ -5,7 +5,7 @@
 Play Art is a decentralized ART and NFT creation platform, for creating artistic NFT that have a weirdly unique prop called live drawing.
 
 [More on project code logic](https://www.w3resource.com/html5-canvas/html5-canvas-lines.php)            
-[Submission video](https://www.youtube.com/watch?v=PuWnt0reuY4)
+
 
 ### Project info
 
@@ -43,6 +43,8 @@ https://mumbai.polygonscan.com/address/0x195E173068DC793a43E18c5Eb2844b3823D8105
 - This project used Moralis to store all the art and drawing (draft) so users can come back to work on them.
 
 ### submission video
+
+[![Play Art Video submission](https://img.youtube.com/vi/PuWnt0reuY4/1.jpg)](https://www.youtube.com/watch?v=PuWnt0reuY4)
 
 https://youtu.be/PuWnt0reuY4
 
