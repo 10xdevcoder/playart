@@ -49,7 +49,7 @@ export const Accounts = () => {
     const artTestDataquery = new Moralis.Query(ArtTestData);
     setProgress(20);
 
-    artTestDataquery.equalTo("ArtCreator", address);
+    artTestDataquery.equalTo("ArtCreator", account_address);
     setProgress(50);
     const dataQuery = await artTestDataquery.find();
     setDataQuery(dataQuery);
@@ -162,7 +162,7 @@ export const Accounts = () => {
                           firstText={"No art minted"}
                           secondText={"Are you a creator ?"}
                           link={true}
-                          buttonText={"Create art"}
+                          buttonText={"Mint Art"}
                           linkurl={`${window.location.origin}/`}
                         />
                       </div>
@@ -183,39 +183,53 @@ export const Accounts = () => {
                   marginLeft: "7em",
                 }}
               >
-                {DataQuery.map((data, index) => {
-                  return (
-                    <div
-                      onClick={() => {
-                        navigate(`/draw/${data?.id}`);
-                      }}
-                      key={index}
-                      className="test"
-                      style={{
-                        width: "fit-content",
-                        margin: "1em",
-                        cursor: "pointer",
-                      }}
-                    >
-                      <CanvasDraw
-                        style={{
-                          borderRadius: "10px",
-                          border: "3px solid black",
-                        }}
-                        disabled
-                        brushRadius={0}
-                        lazyRadius={0}
-                        immediateLoading={true}
-                        hideGrid
-                        hideInterface
-                        ref={(canvasDraw) =>
-                          (viewablecanvas.current = canvasDraw)
-                        }
-                        saveData={data?.attributes.SavedData}
-                      />
-                    </div>
-                  );
-                })}
+                {DataQuery.length > 0 ? (
+                  <>
+                    {DataQuery.map((data, index) => {
+                      return (
+                        <div
+                          onClick={() => {
+                            navigate(`/draw/${data?.id}`);
+                          }}
+                          key={index}
+                          className="test"
+                          style={{
+                            width: "fit-content",
+                            margin: "1em",
+                            cursor: "pointer",
+                          }}
+                        >
+                          <CanvasDraw
+                            style={{
+                              borderRadius: "10px",
+                              border: "3px solid black",
+                            }}
+                            disabled
+                            brushRadius={0}
+                            lazyRadius={0}
+                            immediateLoading={true}
+                            hideGrid
+                            hideInterface
+                            ref={(canvasDraw) =>
+                              (viewablecanvas.current = canvasDraw)
+                            }
+                            saveData={data?.attributes.SavedData}
+                          />
+                        </div>
+                      );
+                    })}
+                  </>
+                ) : (
+                  <div>
+                    <Emptybar
+                      firstText={"No art created"}
+                      secondText={"Create art while connected"}
+                      link={true}
+                      buttonText={"Create art"}
+                      linkurl={`${window.location.origin}/draw`}
+                    />
+                  </div>
+                )}
               </div>
             </Tab>
           </Tabs>
