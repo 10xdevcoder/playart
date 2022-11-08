@@ -43,6 +43,8 @@ https://mumbai.polygonscan.com/address/0x195E173068DC793a43E18c5Eb2844b3823D8105
 
 ### submission video
 
+https://youtu.be/PuWnt0reuY4
+
 ## Running the app
 
 First, clone the repo with the following git command:
