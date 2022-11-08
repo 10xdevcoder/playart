@@ -92,7 +92,7 @@ export const NFTViewFull = () => {
       </div>
       <div
         style={{
-          marginTop: "2.4em",
+          marginTop: "1.3em",
           height: "100vh",
           marginBottom: "14em",
           position: "relative",
