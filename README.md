@@ -39,6 +39,8 @@ https://github.com/praise-eze/playart/blob/bbecf182726a478aa7229ecce8c9e0ad3e26c
 
 https://mumbai.polygonscan.com/address/0x195E173068DC793a43E18c5Eb2844b3823D81055
 
+- This project used Moralis to store all the art and drawing (draft) so users can come back to work on them.
+
 ### submission video
 
 ## Running the app
