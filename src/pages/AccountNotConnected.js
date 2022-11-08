@@ -1,17 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import InputArtField from "../components/Addons/InputArtField";
 import Navbar from "../components/Navbar/Navbar";
 import { UilPen } from "@iconscout/react-unicons";
 import Emptybar from "../components/Emptybar/Emptybar";
 import { RoundButtonInputArt } from "../components/RoundButton/RoundButtonTools";
+import { useAccount } from "wagmi";
 
 export const AccountNotConnected = () => {
   const navigate = useNavigate();
-  const [address, setAddress] = useState("");
+  const { address, isConnected } = useAccount();
+  const [_address, setAddress] = useState("");
   const search = (url) => {
     navigate(url);
   };
+  useEffect(() => {
+    if (isConnected) {
+      search(`${address}`);
+    }
+  }, [isConnected, address]);
+
   return (
     <div>
       <div>
@@ -30,7 +38,7 @@ export const AccountNotConnected = () => {
         >
           <div style={{ width: "50%" }}>
             <InputArtField
-              value={address}
+              value={_address}
               onChange={(event) => setAddress(event.target.value)}
               placeholder="Search Address"
               icon={<UilPen size="24" color="#00000" />}
@@ -43,8 +51,8 @@ export const AccountNotConnected = () => {
             borderRadius="38px"
             cursor="pointer"
             onClick={() => {
-              if (address.length == 42) {
-                search(`${address}`);
+              if (_address.length == 42) {
+                search(`${_address}`);
               } else {
                 console.log("Address too short");
               }
