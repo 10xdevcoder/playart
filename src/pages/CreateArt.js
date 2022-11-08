@@ -33,6 +33,7 @@ import LoadingBar from "react-top-loading-bar";
 import debounce from "lodash.debounce";
 import { useDebounce } from "use-debounce";
 import PreviewAndShareModal from "../components/Modals/PreviewAndShareModal";
+import Emptybar from "../components/Emptybar/Emptybar";
 
 export const CreateArt = () => {
   const [showNavbar, setShowNavbar] = useState(false);
@@ -58,8 +59,6 @@ export const CreateArt = () => {
 
   const { object_id } = useParams();
 
-  var sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
-
   useEffect(() => {
     const loadMoralis = async () => {
       await Moralis.start({
@@ -71,6 +70,11 @@ export const CreateArt = () => {
     loadMoralis();
     LoadData();
   }, []);
+
+  useEffect(() => {
+    LoadData();
+  }, [address]);
+
   const LoadData = async () => {
     setSavedData(saveableCanvas?.current?.getSaveData());
     setArtUrlData(saveableCanvas?.current?.getDataURL());
@@ -122,8 +126,11 @@ export const CreateArt = () => {
         setArtData(Dataquery);
         //  console.log(artData);
         // console.log(object_id);
+        setProgress(100);
       },
-      (error) => {}
+      (error) => {
+        console.log(error);
+      }
     );
   };
   window.addEventListener("load", () => {
@@ -222,7 +229,6 @@ export const CreateArt = () => {
         progress={progress}
         onLoaderFinished={() => setProgress(0)}
       />
-      {/* {allowPublicEdit || (isConnected && creator === address) ? ( */}
       <div
         style={{
           display:
@@ -618,9 +624,20 @@ export const CreateArt = () => {
           onHide={() => setShowPreviewAndHideModal(false)}
         />
       </div>
-      {/*}  ) : (
-        <div>You cant edit someone else art without permission</div>
-    )} */}
+      {artData && !allowPublicEdit && isConnected && creator !== address && (
+        <>
+          <Navbar />
+          <div>
+            <Emptybar
+              firstText={"You cant edit someone else art without permission"}
+              secondText={"You can request permission from the art creator"}
+              link={true}
+              linkurl={`/`}
+              buttonText={"Back home"}
+            />
+          </div>
+        </>
+      )}
     </>
   );
 };

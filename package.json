@@ -10,6 +10,7 @@
     "@emotion/styled": "^11.10.5",
     "@icon-park/react": "^1.4.2",
     "@iconscout/react-unicons": "^1.1.6",
+    "@mui/lab": "^5.0.0-alpha.107",
     "@mui/material": "^5.10.12",
     "@rainbow-me/rainbowkit": "^0.7.4",
     "@testing-library/jest-dom": "^5.16.5",

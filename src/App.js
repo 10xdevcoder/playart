@@ -8,6 +8,7 @@ import { NFTViewFull } from "./pages/NFTViewFull";
 import { ViewArt } from "./pages/ViewArt";
 import InitializeArtPage from "./pages/InitializeArtPage";
 import Home from "./pages/Home";
+import All from "./pages/All";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/" element={<Home />} />
           {/*}  <Route path="/explore" element={<Explore />} /> */}
           <Route path="/draw" element={<InitializeArtPage />} />
+          <Route path="/all" element={<All />} />
           <Route path="/draw/:object_id" element={<CreateArt />} />
           <Route path="/art/:art_id" element={<ViewArt />} />
           <Route path="/account" element={<AccountNotConnected />} />

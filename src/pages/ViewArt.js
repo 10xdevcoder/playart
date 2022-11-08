@@ -235,10 +235,12 @@ export const ViewArt = () => {
               //  console.log("loaded ended");
             }}
             liveDrawTimeEject={(e) => {
-              setTimeFrameValue(Number((e / 400).toFixed(0)));
+              setTimeFrameValue(Number(((e * 5.06) / 1000).toFixed(0)));
+              console.log(e);
             }}
             DrawingTime={(e) => {
               setMaxTime(Number((e / 1000).toFixed(0)));
+              console.log(e);
             }}
           />
         </div>

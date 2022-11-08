@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import Emptybar from "../components/Emptybar/Emptybar";
 import { useAccount } from "wagmi";
 
-const Home = () => {
+const All = () => {
   const [DataQuery, setDataQuery] = useState([]);
   const { address } = useAccount();
   const [error, setError] = useState();
@@ -27,10 +27,6 @@ const Home = () => {
     loadMoralis();
     QueryData();
   }, []);
-
-  useEffect(() => {
-    QueryData();
-  }, [address]);
 
   const QueryData = async () => {
     const ArtTestData = Moralis.Object.extend("ArtTestData");
@@ -63,7 +59,7 @@ const Home = () => {
         />
       </div>
       <div style={{ marginTop: "4em" }}>
-        <h2>Recently created</h2>
+        <h2>All created</h2>
       </div>
       <div>
         <>
@@ -77,7 +73,7 @@ const Home = () => {
                   alignItems: "center",
                 }}
               >
-                {DataQuery.slice(0, 5).map((data, index) => {
+                {DataQuery.map((data, index) => {
                   return (
                     <div
                       onClick={() => {
@@ -118,4 +114,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default All;
