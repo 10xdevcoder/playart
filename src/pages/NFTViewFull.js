@@ -206,7 +206,6 @@ export const NFTViewFull = () => {
                     </span>
                   </div>
                   <div className={styles.AddIcons}>
-                    <Icon name="" size={25} />
                     <span className={styles.traitsextra}>
                       Polygon Mumbai Chain - {contractType}
                     </span>
