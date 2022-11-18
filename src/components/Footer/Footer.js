@@ -22,15 +22,12 @@ export default function Footer({ activeSocial = true }) {
         <span>Built by PRAISE</span>
       </div>
       <div className={styles.socials}>
-        <a target={"_blank"} rel="noreferrer" href="https://github.com/xcrispy">
-          <SiGithub size={25} fill="rgb(8, 8, 154)" />
-        </a>
         <a
           target={"_blank"}
           rel="noreferrer"
-          href="https://discord.gg/S9nGUhEH"
+          href="https://github.com/praise-eze"
         >
-          <SiDiscord size={25} fill="rgb(8, 8, 154)" />
+          <SiGithub size={25} fill="rgb(8, 8, 154)" />
         </a>
       </div>
     </footer>
