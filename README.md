@@ -9,7 +9,7 @@ Play Art is a decentralized ART and NFT creation platform, for creating artistic
 
 ### Project info
 
-project created by praise (to contact me : ozipraisegod@gmail.com, you can also create an issue to contact me (i monitor all my repos))
+project created by 0xpr0f to contact me create an issue to contact me
 
 - This project uses NFT.storge to store the metadata with storeBlob in the following format.
 
