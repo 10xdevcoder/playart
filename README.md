@@ -46,8 +46,6 @@ https://mumbai.polygonscan.com/address/0x195E173068DC793a43E18c5Eb2844b3823D8105
 
 [![Play Art Video submission](https://img.youtube.com/vi/PuWnt0reuY4/1.jpg)](https://www.youtube.com/watch?v=PuWnt0reuY4)
 
-https://youtu.be/PuWnt0reuY4
-
 ## Running the app
 
 First, clone the repo with the following git command:
