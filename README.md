@@ -86,3 +86,7 @@ yarn start
 ```
 
 preferably use chrome or brave for testing
+___
+Mainly developed by [@0xprof](https://github.com/0xpr0f)    
+Play Art winner of Best Overall Project on Polygon chain    
+https://developers.moralis.com/google-hackathon/winners/#winners
