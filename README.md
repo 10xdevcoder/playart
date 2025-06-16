@@ -33,8 +33,8 @@ const artStructure = {
 };
 ```
 
-https://github.com/praise-eze/playart/blob/bbecf182726a478aa7229ecce8c9e0ad3e26ca30/src/pages/ViewArt.js#L70
-https://github.com/praise-eze/playart/blob/bbecf182726a478aa7229ecce8c9e0ad3e26ca30/src/pages/ViewArt.js#L169
+https://github.com/10xdevcoder/playart/blob/bbecf182726a478aa7229ecce8c9e0ad3e26ca30/src/pages/ViewArt.js#L70
+https://github.com/10xdevcoder/playart/blob/bbecf182726a478aa7229ecce8c9e0ad3e26ca30/src/pages/ViewArt.js#L169
 
 - This project is deployed on the polygon mumbai blockchain and takes advantage of the fast transaction time & low gas cost it has.
 
