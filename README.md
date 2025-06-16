@@ -48,7 +48,7 @@ https://mumbai.polygonscan.com/address/0x195E173068DC793a43E18c5Eb2844b3823D8105
 First, clone the repo with the following git command:
 
 ```
-git clone https://github.com/praise-eze/playart.git
+git clone https://github.com/10xdevcoder/playart.git
 ```
 
 Second, open a terminal in the root directory of the project and run:
